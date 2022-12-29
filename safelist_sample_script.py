@@ -12,7 +12,7 @@ async def request_executor(session, number, res_writer, err_writer,limit):
     
     async with limit:
         try:
-            async with session.request(url=url, method = 'POST', data={'PhoneNumber': number}, headers={"content-type": "application/x-www-form-urlencoded"}, auth=aiohttp.BasicAuth(ACCOUNT_SID, AUTH_TOKEN)) as response:
+            async with session.request(url=URL, method = 'POST', data={'PhoneNumber': number}, headers={"content-type": "application/x-www-form-urlencoded"}, auth=aiohttp.BasicAuth(ACCOUNT_SID, AUTH_TOKEN)) as response:
                 response_text = await response.text()
                 print(f'{number}, {time.asctime(time.localtime(time.time()))}, {response_text}')
                 await write_result([f'{number} : {response_text}'],res_writer)
